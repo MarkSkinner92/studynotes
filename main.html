@@ -1,0 +1,164 @@
+ <!DOCTYPE html>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<html>
+<head>
+<title>StudyNotes</title>
+    <style>
+textarea {
+  width: 30%;
+  height: 50%;
+}
+p {
+    margin: 0;
+    padding: 0;
+}
+body {
+  color: black;
+}
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+    background-color: #d3d3d3;
+}
+
+.right {
+  right: 0;
+    background-color: #bfbfbf;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.centered img {
+  width: 150px;
+  border-radius: 50%;
+}
+</style>
+</head>
+<body>
+<div class="split left">
+    <div class="centered">
+<h1 style="text-align: center">Study Notes Generator</h1>
+<p>by Mark Skinner</p>
+        <br>
+    <input id="titleinput" placeholder="put title of paragraph"><button onclick="go()">Convert!</button><button onclick = "document.getElementById('txtin').value = '';document.getElementById('titleinput').value=''">Clear</button>
+    <br><br>
+<textarea id = "txtin" name="message" placeholder="Paste in full paragraph from textbook" style="width: 572px; height: 296px;"></textarea>
+    <br>
+        <br>
+<div  id="post-body-5314869226162461043" itemprop="description articleBody">
+<a href="https://sites.google.com/a/share.epsb.ca/social-studies-department/grade-10/10-1/related-issue-1-1" target="_blank">SOC-10 Globalization</a>
+    <br>
+<a href="https://sites.google.com/a/share.epsb.ca/social-studies-department/grade-11/20-1/related-issue-1" target="_blank">OC-20 Exploring Nationalism Text</a>
+    <br>
+<a href="https://sites.google.com/a/share.epsb.ca/social-studies-department/grade-12/30-2/related-issue-1" target="_blank">SOC-30 Perspectives on Ideology</a>
+    <br>
+</div>
+    </div>
+    </div>
+<div class="split right">
+  <div class="centered" style="width: 90%">
+    <p id="bodytext" style="text-align: left;padding:0px; margin: 0px;">once it's done processing, paste this text into your google docs to make your complete study notes</p>
+  </div>
+</div>
+    <script>
+    var intext = "nothing yet";
+    var type = Math.floor(Math.random() * 7);
+        function go(){
+            type++;
+            if(type >= 7) type = 0;
+            var finaloutput = "";
+            intext = document.getElementById("txtin").value;
+            var sentances = intext.match(/[^\.!\?]+[\.!\?]+/g);
+            for(var i = 0; i < sentances.length; i++){
+                sentances[i] = sentances[i].replace(/\n/g, " ");
+                if(sentances[i].charAt(sentances[i].length-1) == '?'){//remove all questions
+                    sentances.splice(i, 1);
+                    i--;
+                }
+            }
+            if(sentances.length < 2){
+                finaloutput = "sorry, text was not long enough to procesess";
+                document.getElementById("bodytext").innerHTML = finaloutput;
+                return;
+            }
+            switch(type){
+                case 0://small header with bullet points
+                finaloutput = sentances[0] + sentances[1];
+                if(sentances.length >= 5){
+                    finaloutput += "<ul>";
+                    for(var i = 0; i < 3; i++){
+                        finaloutput += "<li>" + sentances[i+2] + "</li>";
+                    }
+                    finaloutput += "</ul>";
+                }
+                break;
+                case 1://small header with numbered lists
+                finaloutput = sentances[0] + sentances[1];
+                if(sentances.length >= 5){
+                    finaloutput += "<ol>";
+                    for(var i = 0; i < 3; i++){
+                        finaloutput += "<li>" + sentances[i+2] + "</li>";
+                    }
+                    finaloutput += "</ol>";
+                }
+                break;
+                case 2://small header with numbered lists
+                finaloutput = sentances[0] + sentances[1] + sentances[2];
+                break;
+                case 3://small header with bullet points
+                finaloutput = sentances[0] + sentances[1];
+                if(sentances.length >= 5){
+                    finaloutput += "<ul>";
+                    for(var i = 0; i < 2; i++){
+                        finaloutput += "<li>" + sentances[i+2] + "</li>";
+                    }
+                    finaloutput += "</ul>"+sentances[5];
+                }
+                break;
+                case 4://small header with bullet points
+                if(sentances.length >= 5){
+                    finaloutput += "<ul>";
+                    for(var i = 0; i < 4; i++){
+                        finaloutput += "<li>" + sentances[i] + "</li>";
+                    }
+                    finaloutput += "</ul>";
+                }
+                break;
+                case 5://short seperated paragraphs
+                if(sentances.length >= 5){
+                    finaloutput += sentances[0]+sentances[1]+"<br><br>"+sentances[2]+sentances[3];
+                }
+                break;
+                case 6://bullet points with small footer
+                if(sentances.length >= 5){
+                    finaloutput += "<ul>";
+                    for(var i = 0; i < 3; i++){
+                        finaloutput += "<li>" + sentances[i] + "</li>";
+                    }
+                    finaloutput += "</ul>" + sentances[3] + sentances[4];
+                }
+                break;
+            }
+            var title = '<strong>'+document.getElementById("titleinput").value+"</strong><br>";
+            document.getElementById("bodytext").innerHTML = title+finaloutput;
+        }
+    </script>
+</body>
+</html> 

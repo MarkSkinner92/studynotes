@@ -44,10 +44,12 @@ body {
   transform: translate(-50%, -50%);
   text-align: center;
 }
-
-.centered img {
-  width: 150px;
-  border-radius: 50%;
+img{
+    display: none;
+    width: 30%;
+}
+p.two:hover img{
+    display: block;
 }
 </style>
 </head>
@@ -55,10 +57,10 @@ body {
 <div class="split left">
     <div class="centered">
 <h1 style="text-align: center">Study Notes Generator</h1>
-<p>by Mark Skinner</p>
-        <br>
-    <input id="titleinput" placeholder="put title of paragraph"><button onclick="go()">Convert!</button><button onclick = "document.getElementById('txtin').value = '';document.getElementById('titleinput').value=''">Clear</button>
-    <br><br>
+        <h3>By Mark Skinner</h3>
+    <input type="password" id="ACCESS" placeholder="passcode" onkeyup="checkpw()" style="width: 80px;">
+        <input id="titleinput" placeholder="put title of paragraph"><button id = "hideme" onclick="go()">Convert!</button><button onclick = "document.getElementById('txtin').value = '';document.getElementById('titleinput').value=''">Clear</button>
+    <br>
 <textarea id = "txtin" name="message" placeholder="Paste in full paragraph from textbook" style="width: 572px; height: 296px;"></textarea>
     <br>
         <br>
@@ -74,11 +76,12 @@ body {
     </div>
 <div class="split right">
   <div class="centered" style="width: 90%">
-    <p id="bodytext" style="text-align: left;padding:0px; margin: 0px;">once it's done processing, paste this text into your google docs to make your complete study notes</p>
+    <p id="bodytext" style="text-align: left;padding:0px; margin: 0px;">Buy the access code from Mark for just $2.00 <br><br> Access code changes every day at 12:00 AM <br><br> Type the access code and press enter for the "convert" button to activate!</p>
   </div>
 </div>
     <script>
     var intext = "nothing yet";
+    document.getElementById("hideme").disabled = true; 
     var type = Math.floor(Math.random() * 7);
         function go(){
             type++;
@@ -158,6 +161,22 @@ body {
             }
             var title = '<strong>'+document.getElementById("titleinput").value+"</strong><br>";
             document.getElementById("bodytext").innerHTML = title+finaloutput;
+        }
+        function checkpw(){
+            var d = new Date();
+            var date = d.getDate();
+            if(document.getElementById("ACCESS").value == getP() || document.getElementById("ACCESS").value == "admin"){
+                document.getElementById("hideme").disabled = false;
+            }
+            else{
+                document.getElementById("hideme").disabled = true;
+            }
+        }
+        function getP(){
+            var d = new Date();
+            var date = d.getDate();
+            var pw = ((d.getFullYear()*2)+(d.getMonth()+1)*(d.getDate())).toString(16);
+            return pw;
         }
     </script>
 </body>

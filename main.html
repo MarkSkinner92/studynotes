@@ -25,16 +25,15 @@ body {
   top: 0;
   overflow-x: hidden;
   padding-top: 20px;
+    background-image: url('me2.jpg');background-size:100% 100%;background-repeat: no-repeat;
 }
 
 .left {
   left: 0;
-    background-color: #d3d3d3;
 }
 
 .right {
   right: 0;
-    background-color: #bfbfbf;
 }
 
 .centered {
@@ -59,24 +58,25 @@ p.two:hover img{
 <h1 style="text-align: center">Study Notes Generator</h1>
         <h3>By Mark Skinner</h3>
     <input type="password" id="ACCESS" placeholder="passcode" onkeyup="checkpw()" style="width: 80px;">
-        <input id="titleinput" placeholder="put title of paragraph"><button id = "hideme" onclick="go()">Convert!</button><button onclick = "document.getElementById('txtin').value = '';document.getElementById('titleinput').value=''">Clear</button>
+        <input id="titleinput" placeholder="put title of paragraph" style="width: 150px;"><button id = "hideme" onclick="go()">Convert!</button><button onclick = "document.getElementById('txtin').value = '';document.getElementById('titleinput').value=''">Clear</button>
+        <button id="selectall" onclick="selectText('bodytext')">Select -></button>
     <br>
 <textarea id = "txtin" name="message" placeholder="Paste in full paragraph from textbook" style="width: 572px; height: 296px;"></textarea>
     <br>
         <br>
 <div  id="post-body-5314869226162461043" itemprop="description articleBody">
-<a href="https://sites.google.com/a/share.epsb.ca/social-studies-department/grade-10/10-1/related-issue-1-1" target="_blank">SOC-10 Globalization</a>
+<a href="https://sites.google.com/a/share.epsb.ca/social-studies-department/grade-10/10-1/related-issue-1-1" target="_blank"style="background-color: #FFFFFF">SOC-10 Globalization</a>
     <br>
-<a href="https://sites.google.com/a/share.epsb.ca/social-studies-department/grade-11/20-1/related-issue-1" target="_blank">OC-20 Exploring Nationalism Text</a>
+<a href="https://sites.google.com/a/share.epsb.ca/social-studies-department/grade-11/20-1/related-issue-1" target="_blank"style="background-color: #FFFFFF">OC-20 Exploring Nationalism Text</a>
     <br>
-<a href="https://sites.google.com/a/share.epsb.ca/social-studies-department/grade-12/30-2/related-issue-1" target="_blank">SOC-30 Perspectives on Ideology</a>
+<a href="https://sites.google.com/a/share.epsb.ca/social-studies-department/grade-12/30-2/related-issue-1" target="_blank"style="background-color: #FFFFFF">SOC-30 Perspectives on Ideology</a>
     <br>
 </div>
     </div>
     </div>
 <div class="split right">
   <div class="centered" style="width: 90%">
-    <p id="bodytext" style="text-align: left;padding:0px; margin: 0px;">Buy the access code from Mark for just $2.00 <br><br> Access code changes every day at 12:00 AM <br><br> Type the access code and press enter for the "convert" button to activate!</p>
+    <p onclick="selectText('bodytext')" id="bodytext" style="text-align: left;padding:0px; margin: 0px;">Buy the access code from Mark for just $2.00 <br><br> Access code changes every day at 12:00 AM <br><br> Type the access code and press enter for the "convert" button to activate!</p>
   </div>
 </div>
     <script>
@@ -178,6 +178,18 @@ p.two:hover img{
             var pw = ((d.getFullYear()*2)+(d.getMonth()+1)*(d.getDate())).toString(16);
             return pw;
         }
+        function selectText(containerid) {
+    if (document.selection) { // IE
+        var range = document.body.createTextRange();
+        range.moveToElementText(document.getElementById(containerid));
+        range.select();
+    } else if (window.getSelection) {
+        var range = document.createRange();
+        range.selectNode(document.getElementById(containerid));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+    }
+}
     </script>
 </body>
 </html> 
